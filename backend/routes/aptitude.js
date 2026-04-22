@@ -1,8 +1,7 @@
-import express from 'express';
-import { generateAptitude } from '../controllers/aptitudeController.js';
-
+const express = require('express');
 const router = express.Router();
+const { generateAptitude } = require('../controllers/aptitudeController');
 
 router.get('/generate', generateAptitude);
 
-export default router;
+module.exports = router;

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const aptitudeRoutes = require('./routes/aptitude');
 dotenv.config();
 
 const app = express();
@@ -20,6 +20,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/interviews', require('./routes/interviews'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/aptitude', require('./routes/aptitude'));
 
 // Health check
 app.get('/api/health', (req, res) => {
