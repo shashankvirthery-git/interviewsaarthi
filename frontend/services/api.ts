@@ -43,4 +43,8 @@ export const aiAPI = {
 export const dashboardAPI = {
   getStats: () => api.get('/dashboard/stats'),
 }
+export const aptitudeAPI = {
+  generate: (category: string) =>
+    api.get(`/aptitude/generate?category=${category}`),
+};
 export default api
