@@ -11,6 +11,7 @@ const NAV = [
   { href:'/interview',         icon:'🎤', label:'Interview',   desc:'New AI session' },
   { href:'/resume',            icon:'📄', label:'Resume AI',   desc:'ATS analyzer' },
   { href:'/dashboard/history', icon:'◫',  label:'History',     desc:'Past sessions' },
+  { href:'/aptitude', icon:'🧮', label:'Aptitude', desc:'AI practice quiz' },
 ]
 
 // Generate a gradient based on name

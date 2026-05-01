@@ -9,13 +9,15 @@ exports.generateAptitude = async (req, res) => {
     }
 
     const prompt = `
-Generate 5 ${category} aptitude questions with 4 options and correct answers.
-    `;
+Generate 25 ${category} aptitude questions. Return ONLY a valid JSON array, no extra text, no markdown, no explanation.
+Format: [{ "question": "...", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "A. ..." }]
+`;
 
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         model: "llama3-70b-8192",
+        max_tokens: 4000,
         messages: [{ role: "user", content: prompt }],
       },
       {
@@ -26,9 +28,11 @@ Generate 5 ${category} aptitude questions with 4 options and correct answers.
       }
     );
 
-    const result = response.data.choices[0].message.content;
+    const raw = response.data.choices[0].message.content;
+    const cleaned = raw.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(cleaned);
 
-    res.json({ questions: result });
+    res.json({ questions: parsed });
 
   } catch (error) {
     console.error("APTITUDE ERROR:", error.message);
