@@ -1,24 +1,30 @@
-const Groq = require('groq-sdk');
-
-const getGroq = () => new Groq({ apiKey: process.env.GROQ_API_KEY });
+const axios = require('axios');
 
 const callGroq = async (prompt, systemMsg = 'You are a helpful AI assistant.', maxTokens = 1024) => {
-  const groq = getGroq();
   if (!process.env.GROQ_API_KEY) throw new Error('GROQ_API_KEY not set in .env file');
 
-  const completion = await groq.chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
-    messages: [
-      { role: 'system', content: systemMsg },
-      { role: 'user', content: prompt }
-    ],
-    temperature: 0.7,
-    max_tokens: maxTokens,
-  });
+  const response = await axios.post(
+    'https://api.groq.com/openai/v1/chat/completions',
+    {
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: systemMsg },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.7,
+      max_tokens: maxTokens,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 30000,
+    }
+  );
 
-  return completion.choices[0].message.content;
+  return response.data.choices[0].message.content;
 };
-
 const parseJSON = (raw) => {
   let cleaned = raw.trim();
   cleaned = cleaned.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim();
