@@ -348,15 +348,29 @@ export default function InterviewSessionPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flexShrink: 0 }}>
             {voiceSupported && (
-              <button onClick={isListening ? stopListening : startListening}
-                disabled={!canAnswer}
-                style={{
-                  width: 42, height: 42, borderRadius: 12, border: 'none', cursor: 'pointer',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
-                  background: isListening ? 'rgba(255,77,109,.2)' : 'var(--c-card)',
-                  outline: isListening ? '1px solid rgba(255,77,109,.4)' : '1px solid var(--c-border)',
-                  transition: 'all .15s', opacity: canAnswer ? 1 : 0.4,
-                }}>🎤</button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+  <button onClick={isListening ? stopListening : startListening}
+    disabled={!canAnswer}
+    style={{
+      width: 42, height: 42, borderRadius: 12, border: 'none', cursor: 'pointer',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
+      background: isListening ? 'rgba(255,77,109,.3)' : 'var(--c-card)',
+      outline: isListening ? '2px solid #ff4d6d' : '1px solid var(--c-border)',
+      transition: 'all .15s', opacity: canAnswer ? 1 : 0.4,
+      boxShadow: isListening ? '0 0 16px rgba(255,77,109,.5)' : 'none',
+      animation: isListening ? 'tdots 1s infinite' : 'none',
+      position: 'relative',
+    }}>
+    {isListening ? '🔴' : '🎤'}
+  </button>
+  {isListening && (
+    <span style={{
+      fontSize: 9, color: '#ff4d6d', fontFamily: 'var(--font-mono)',
+      fontWeight: 700, letterSpacing: '.05em',
+      animation: 'pgFade .3s ease',
+    }}>REC●</span>
+  )}
+</div>
             )}
             <button onClick={handleSubmit} disabled={!canAnswer || !input.trim()}
               style={{
