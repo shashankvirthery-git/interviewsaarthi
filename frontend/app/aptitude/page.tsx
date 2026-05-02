@@ -60,6 +60,18 @@ export default function AptitudePage() {
       </div>
 
       <div style={{ maxWidth: 680, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <button
+  onClick={() => router.push('/dashboard')}
+  style={{
+    display: "inline-flex", alignItems: "center", gap: 6,
+    padding: "8px 14px", borderRadius: 10, marginBottom: 24,
+    background: "rgba(255,255,255,.04)", border: "1px solid var(--c-border)",
+    color: "var(--c-muted)", cursor: "pointer", fontSize: 13,
+    fontFamily: "var(--font-body)",
+  }}
+>
+  ← Back
+</button>
 
         {/* Header */}
         <div style={{ marginBottom: 48, animation: "pgFade .4s ease forwards" }}>
