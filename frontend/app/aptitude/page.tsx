@@ -60,14 +60,28 @@ export default function AptitudePage() {
       </div>
 
       <div style={{ maxWidth: 680, margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <button
+      <button
   onClick={() => router.push('/dashboard')}
+  onMouseEnter={e => {
+    e.currentTarget.style.borderColor = "var(--c-accent)";
+    e.currentTarget.style.color = "var(--c-text)";
+    e.currentTarget.style.transform = "translateX(-3px)";
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.borderColor = "var(--c-border)";
+    e.currentTarget.style.color = "var(--c-muted)";
+    e.currentTarget.style.transform = "translateX(0)";
+  }}
   style={{
+    position: "fixed", top: 24, left: 24, zIndex: 100,
     display: "inline-flex", alignItems: "center", gap: 6,
-    padding: "8px 14px", borderRadius: 10, marginBottom: 24,
-    background: "rgba(255,255,255,.04)", border: "1px solid var(--c-border)",
+    padding: "8px 16px", borderRadius: 10,
+    background: "rgba(12,14,26,0.85)", backdropFilter: "blur(12px)",
+    border: "1px solid var(--c-border)",
     color: "var(--c-muted)", cursor: "pointer", fontSize: 13,
-    fontFamily: "var(--font-body)",
+    fontFamily: "var(--font-body)", fontWeight: 600,
+    transition: "all .2s cubic-bezier(.34,1.56,.64,1)",
+    animation: "pgFade .3s ease",
   }}
 >
   ← Back
